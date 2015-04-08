@@ -24,7 +24,7 @@
     <div id="body">
         <aside>
             <ul data-bind="foreach: filteredResults">
-                <li data-bind="click: $parent.select">
+                <li data-bind="click: $parent.select, css: { selected: isSelected }">
                     <img data-bind="attr: { src: imagePath, alt: name }" />
                     <span data-bind="text: name"></span>
                 </li>

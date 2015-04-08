@@ -1,7 +1,7 @@
 ﻿/// <reference path="jquery-2.1.3.intellisense.js" />
 /// <reference path="knockout-3.3.0.debug.js" />
 
-$(function() {
+$(function () {
     var SearchPageViewModel = function() {
         var self = this;
 
@@ -38,15 +38,25 @@ $(function() {
             $.ajax({
                 url: "/api/unicorns",
                 success: function (results) {
-                    self.results(results);
+                    var vms = ko.utils.arrayMap(results, function (result) {
+                        result.isSelected = ko.observable();
+                        return result;
+                    });
+                    self.results(vms);
                 }
             });
 
             return false;
         };
 
-        self.select = function(item) {
+        self.select = function (item) {
+            var previousSelectedResult = self.selectedResult();
+            if (previousSelectedResult) {
+                previousSelectedResult.isSelected(false);
+            }
+
             self.selectedResult(item);
+            item.isSelected(true);
         };
     };
 
