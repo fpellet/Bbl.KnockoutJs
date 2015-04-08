@@ -9,49 +9,67 @@
     <link href="/Content/main.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div>
-            <form method="post" data-bind="submit: search">
-                <h1>Bbl</h1>
-                <div>
-                    <input type="search" placeholder="Search an unicorn..." data-bind="textInput: value" />
-                    <input type="search" data-bind="textInput: reversedValue" placeholder="Reverse search..." />
-                    <button type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-    </header>
-    <div id="body">
-        <!-- ko if: filteredResults().length > 0 -->
-        <aside>
-            <ul data-bind="foreach: filteredResults">
-                <li data-bind="click: $parent.select, css: { selected: isSelected }">
-                    <img data-bind="attr: { src: imagePath, alt: name }"/>
-                    <span data-bind="text: name"></span>
-                </li>
-            </ul>
-        </aside>
-        <div>
-            <!-- ko with: selectedResult -->
-            <img data-bind="attr: { src: imagePath, alt: name }"/>
-            <p data-bind="text: name"></p>
-            <p class="keywords">
-                Keyword :
-                <!-- ko { foreach: keywords } -->
-                <span data-bind="text: $data"></span>
+    <!-- ko template: { name: templateName } --><!-- /ko -->
+
+    <script type="text/html" id="homePage">
+        <header class="homePage">
+            <div>
+                <form method="post" data-bind="submit: search">
+                    <h1>Bbl</h1>
+                    <div>
+                        <input type="search" placeholder="Search an unicorn..." data-bind="textInput: value" />
+                        <button type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </header>
+    </script>
+
+    <script type="text/html" id="searchPage">
+        <header>
+            <div>
+                <form method="post" data-bind="submit: search">
+                    <h1>Bbl</h1>
+                    <div>
+                        <input type="search" placeholder="Search an unicorn..." data-bind="textInput: value" />
+                        <input type="search" data-bind="textInput: reversedValue" placeholder="Reverse search..." />
+                        <button type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </header>
+        <div id="body">
+            <!-- ko if: filteredResults().length > 0 -->
+            <aside>
+                <ul data-bind="foreach: filteredResults">
+                    <li data-bind="click: $parent.select, css: { selected: isSelected }">
+                        <img data-bind="attr: { src: imagePath, alt: name }" />
+                        <span data-bind="text: name"></span>
+                    </li>
+                </ul>
+            </aside>
+            <div>
+                <!-- ko with: selectedResult -->
+                <img data-bind="attr: { src: imagePath, alt: name }" />
+                <p data-bind="text: name"></p>
+                <p class="keywords">
+                    Keyword :
+                    <!-- ko { foreach: keywords } -->
+                    <span data-bind="text: $data"></span>
+                    <!-- /ko -->
+                </p>
+                <p>Creation date : <span data-bind="text: creationDate"></span></p>
                 <!-- /ko -->
-            </p>
-            <p>Creation date : <span data-bind="text: creationDate"></span></p>
+                <!-- ko ifnot: selectedResult -->
+                <p class="noSelected">Select an unicorn for more information</p>
+                <!-- /ko -->
+            </div>
             <!-- /ko -->
-            <!-- ko ifnot: selectedResult -->
-            <p class="noSelected">Select an unicorn for more information</p>
+            <!-- ko if: filteredResults().length == 0 -->
+            <div class="noResult">No result</div>
             <!-- /ko -->
         </div>
-        <!-- /ko -->
-        <!-- ko if: filteredResults().length == 0 -->
-        <div class="noResult">No result</div>
-        <!-- /ko -->
-    </div>
+    </script>
 
     <script src="/Scripts/jquery-2.1.3.min.js"></script>
     <script src="/Scripts/knockout-3.3.0.debug.js"></script>

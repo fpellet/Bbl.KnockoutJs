@@ -5,7 +5,12 @@ $(function () {
     var SearchPageViewModel = function() {
         var self = this;
 
+        self.templateName = ko.observable("homePage");
+
         self.value = ko.observable("");
+        self.value.subscribe(function() {
+            self.templateName("searchPage");
+        });
         self.results = ko.observableArray();
         self.selectedResult = ko.observable();
 
@@ -58,6 +63,8 @@ $(function () {
             self.selectedResult(item);
             item.isSelected(true);
         };
+
+        self.search();
     };
 
     var vm = new SearchPageViewModel();
