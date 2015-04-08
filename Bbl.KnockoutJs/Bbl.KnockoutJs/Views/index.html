@@ -22,18 +22,10 @@
 </header>
 <div id="body">
     <aside>
-        <ul>
+        <ul data-bind="foreach: results">
             <li>
-                <img src="/Content/Unicorn/unicorn_7.gif" alt="Unicorn"/>
-                <span>Unicorn</span>
-            </li>
-            <li>
-                <img src="/Content/Unicorn/unicorn_7.gif" alt="Unicorn"/>
-                <span>Unicorn</span>
-            </li>
-            <li>
-                <img src="/Content/Unicorn/unicorn_7.gif" alt="Unicorn"/>
-                <span>Unicorn</span>
+                <img data-bind="attr: { src: imagePath, alt: name }"/>
+                <span data-bind="text: name"></span>
             </li>
         </ul>
     </aside>

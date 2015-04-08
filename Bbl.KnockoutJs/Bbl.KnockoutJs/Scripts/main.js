@@ -6,9 +6,15 @@ $(function() {
         var self = this;
 
         self.value = ko.observable("");
+        self.results = ko.observableArray();
 
-        self.search = function() {
-            alert(self.value());
+        self.search = function () {
+            $.ajax({
+                url: "/api/unicorns",
+                success: function (results) {
+                    self.results(results);
+                }
+            });
 
             return false;
         };
