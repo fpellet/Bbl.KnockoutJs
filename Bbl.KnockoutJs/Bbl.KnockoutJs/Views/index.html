@@ -11,10 +11,10 @@
 <body>
 <header>
     <div>
-        <form method="post">
+        <form method="post" data-bind="submit: search">
             <h1>Bbl</h1>
             <div>
-                <input type="search" placeholder="Search an unicorn..."/>
+                <input type="search" placeholder="Search an unicorn..." data-bind="value: value"/>
                 <button type="submit">Search</button>
             </div>
         </form>
