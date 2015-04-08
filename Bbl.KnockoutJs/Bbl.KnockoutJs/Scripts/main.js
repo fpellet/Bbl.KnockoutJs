@@ -7,6 +7,7 @@ $(function() {
 
         self.value = ko.observable("");
         self.results = ko.observableArray();
+        self.selectedResult = ko.observable();
 
         self.filteredResults = ko.pureComputed(function() {
             return ko.utils.arrayFilter(self.results(), function (item) {
@@ -42,6 +43,10 @@ $(function() {
             });
 
             return false;
+        };
+
+        self.select = function(item) {
+            self.selectedResult(item);
         };
     };
 
