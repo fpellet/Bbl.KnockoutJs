@@ -30,7 +30,8 @@
                 </li>
             </ul>
         </aside>
-        <div data-bind="with: selectedResult">
+        <div>
+            <!-- ko with: selectedResult -->
             <img data-bind="attr: { src: imagePath, alt: name }" />
             <p data-bind="text: name"></p>
             <p class="keywords">
@@ -40,6 +41,10 @@
                 <!-- /ko -->
             </p>
             <p>Creation date : <span data-bind="text: creationDate"></span></p>
+            <!-- /ko -->
+            <!-- ko ifnot: selectedResult -->
+            <p class="noSelected">Select an unicorn for more information</p>
+            <!-- /ko -->
         </div>
     </div>
 
