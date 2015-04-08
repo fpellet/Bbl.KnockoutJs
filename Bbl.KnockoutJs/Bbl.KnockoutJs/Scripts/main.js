@@ -8,6 +8,22 @@ $(function() {
         self.value = ko.observable("");
         self.results = ko.observableArray();
 
+        self.filteredResults = ko.pureComputed(function() {
+            return ko.utils.arrayFilter(self.results(), function (item) {
+                var filter = self.value();
+                if (!filter) {
+                    return true;
+                }
+
+                var name = item.name;
+                if (!name) {
+                    return false;
+                }
+
+                return name.indexOf(filter) != -1;
+            });
+        });
+
         self.search = function () {
             $.ajax({
                 url: "/api/unicorns",
