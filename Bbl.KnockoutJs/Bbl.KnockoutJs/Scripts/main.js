@@ -24,6 +24,15 @@ $(function() {
             });
         });
 
+        self.reversedValue = ko.pureComputed({
+            read: function() {
+                return self.value().split("").reverse().join("");
+            },
+            write: function(value) {
+                self.value(value.split("").reverse().join(""));
+            }
+        });
+
         self.search = function () {
             $.ajax({
                 url: "/api/unicorns",
