@@ -22,17 +22,18 @@
         </div>
     </header>
     <div id="body">
+        <!-- ko if: filteredResults().length > 0 -->
         <aside>
             <ul data-bind="foreach: filteredResults">
                 <li data-bind="click: $parent.select, css: { selected: isSelected }">
-                    <img data-bind="attr: { src: imagePath, alt: name }" />
+                    <img data-bind="attr: { src: imagePath, alt: name }"/>
                     <span data-bind="text: name"></span>
                 </li>
             </ul>
         </aside>
         <div>
             <!-- ko with: selectedResult -->
-            <img data-bind="attr: { src: imagePath, alt: name }" />
+            <img data-bind="attr: { src: imagePath, alt: name }"/>
             <p data-bind="text: name"></p>
             <p class="keywords">
                 Keyword :
@@ -46,6 +47,10 @@
             <p class="noSelected">Select an unicorn for more information</p>
             <!-- /ko -->
         </div>
+        <!-- /ko -->
+        <!-- ko if: filteredResults().length == 0 -->
+        <div class="noResult">No result</div>
+        <!-- /ko -->
     </div>
 
     <script src="/Scripts/jquery-2.1.3.min.js"></script>
